@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import Tweet
 import gameScrape
+from random import randint
 
+## IMPORTANT NOTE: Twitter only allows unique tweets so this script only builds up a finite amount of unique tweets
+# Therefore after this season, new emoji's and wording will be required to be able to use this next season
 
 # Define the function that is to be executed
 def my_job(text):
@@ -16,8 +19,10 @@ def main():
     if(didBertansPlay):
         while(not tweeted):
             try:
-
-                message = happyResponses.pop() + " #GoSpursGo"
+                # Grab a random tweet from the list
+                resp = happyResponses[randint(0, (len(happyResponses)-1) )]
+                happyResponses.remove(resp)
+                message = resp + " #GoSpursGo"
                 print("message: ", message)
                 my_job(message)
                 tweeted = True
@@ -27,7 +32,9 @@ def main():
     elif(didBertansPlay == False):
         while(not tweeted):
             try:
-                message = sadResponses.pop() + " #GoSpursGo"
+                resp = sadResponses[randint(0, (len(sadResponses)-1))]
+                sadResponses.remove(resp)
+                message = resp + " #GoSpursGo"
                 print("message: ", message)
                 my_job(message)
                 tweeted = True
@@ -47,7 +54,8 @@ sadEmjois = ["):", "=(", ":(", ")=", "🙃", "😑", "😞", "😔", "😕", "�
 
 punctation = ["", ".", "!"]
 
-
+##Create the Sad and Happy Arrays of characters because Twitter enforces a unique tweet each time.
+# Also Emoji's are just more exciting to use
 def createResponses():
     for x in happy:
         for y in happyEmojis:
@@ -62,11 +70,5 @@ def createResponses():
         sadResponses.append(a)
 
 createResponses()
-#print(happyResponses)
-#print(len(happyResponses))
-print()
-#print(sadResponses)
-#print(len(sadResponses))
-
 main()
 
