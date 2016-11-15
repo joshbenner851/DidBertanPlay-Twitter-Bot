@@ -27,7 +27,8 @@ def didPlayCurrent():
         print(minutes)
         if(int(minutes) > 0):
             return True
-        print()
+        else:
+            return False
     except Exception as e:
         print(e)
         return e
